@@ -84,6 +84,10 @@ class DVDCornerChallenge {
                 
                 this.updateSpeeds();
                 this.updateSizes();
+
+                // Sync sliders with configured defaults
+                this.elements.speedSlider.value = this.config.speedKnob;
+                this.elements.currentSpeed.textContent = this.config.speedKnob;
             }
             
             initializeAudio() {
