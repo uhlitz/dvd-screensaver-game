@@ -21,7 +21,7 @@ body {
     background: #000;
     overflow: hidden;
     font-family: 'Orbitron', monospace;
-    min-height: 100vh;
+    min-height: 100dvh;
     height: 100dvh;
 }
 
@@ -263,7 +263,7 @@ body {
     top: 0;
     left: 0;
     width: 100vw;
-    min-height: 100vh;
+    min-height: 100dvh;
     height: 100dvh;
     background: rgba(26, 26, 26, 0.3);
     backdrop-filter: blur(3px);
@@ -584,7 +584,7 @@ body {
 /* Game elements */
 #container {
     width: 100vw;
-    min-height: 100vh;
+    min-height: 100dvh;
     height: 100dvh;
     position: relative;
     background: #000;
@@ -661,7 +661,7 @@ body {
     top: 0;
     left: 0;
     width: 100vw;
-    min-height: 100vh;
+    min-height: 100dvh;
     height: 100dvh;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(20px);
@@ -914,6 +914,7 @@ body {
     #game-setup {
         padding-top: 10px;
         padding-bottom: 10px;
+        justify-content: flex-start;
     }
 }
 
@@ -1004,6 +1005,7 @@ body {
     #game-setup {
         padding-top: 4px;
         padding-bottom: 4px;
+        justify-content: flex-start;
     }
 }
 
