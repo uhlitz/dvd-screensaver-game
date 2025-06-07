@@ -3,7 +3,6 @@ class DVDCornerChallenge {
                 this.MIN_SPEED = 1; // Speed when the knob is at 1
                 this.MAX_SPEED = 20; // Speed when the knob is at 11
                 this.DEFAULT_KNOB = 3; // Default knob position
-                this.DEFAULT_SPEED = this.knobToSpeed(this.DEFAULT_KNOB);
                 this.initializeElements();
                 this.initializeGame();
                 this.setupEventListeners();
@@ -82,6 +81,9 @@ class DVDCornerChallenge {
                 // Initialize audio context
                 this.initializeAudio();
                 
+                // Sync sliders with configured defaults
+                this.elements.speedSlider.value = this.config.speedKnob;
+
                 this.updateSpeeds();
                 this.updateSizes();
 
@@ -120,7 +122,12 @@ class DVDCornerChallenge {
                 const STEPS = 10; // positions 1-11 => 10 steps
                 return this.MIN_SPEED + (k - 1) * (this.MAX_SPEED - this.MIN_SPEED) / STEPS;
             }
-            
+
+            updateSpeedLabel() {
+                const speed = this.knobToSpeed(this.config.speedKnob);
+                this.elements.currentSpeed.textContent = speed.toFixed(2);
+            }
+  
             playBounceSound() {
                 if (!this.audioContext || !this.soundEnabled) return;
                 
@@ -193,7 +200,6 @@ class DVDCornerChallenge {
                 // Speed slider event listener
                 this.elements.speedSlider.addEventListener('input', (e) => {
                     this.config.speedKnob = parseInt(e.target.value);
-                    this.elements.currentSpeed.textContent = this.config.speedKnob;
                     this.updateSpeeds();
                     this.updatePreviewSpeeds();
                 });
@@ -261,6 +267,7 @@ class DVDCornerChallenge {
                 const speed = this.knobToSpeed(this.config.speedKnob);
                 this.config.previewSpeed = speed;
                 this.config.gameSpeed = speed;
+                this.updateSpeedLabel();
             }
             
             updateSizes() {
