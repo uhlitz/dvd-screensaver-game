@@ -709,8 +709,10 @@ class DVDCornerChallenge {
                 this.elements.gameStats.classList.remove('show');
                 this.elements.gameStats.innerHTML = '';
                 this.elements.gameSetup.classList.remove('hidden');
+                this.respawnPreviewLogos();
+                this.updateButtons();
             }
-            
+
             restartGame() {
                 this.cleanupPlayers();
                 this.clearPreviewLogos();
@@ -728,7 +730,7 @@ class DVDCornerChallenge {
                 this.elements.gameStats.classList.remove('show');
                 this.elements.gameSetup.classList.remove('hidden');
                 this.elements.gameStats.innerHTML = '';
-                this.resetPlayerInputs();
+                this.respawnPreviewLogos();
                 this.updateButtons();
             }
             
@@ -753,6 +755,16 @@ class DVDCornerChallenge {
                     if (prev) prev.cancelled = true;
                 }
                 this.state.previewLogos = [];
+            }
+
+            respawnPreviewLogos() {
+                this.clearPreviewLogos();
+                for (let i = 1; i <= this.state.currentPlayerCount; i++) {
+                    const input = document.getElementById(`player${i}`);
+                    if (input && input.value.trim()) {
+                        this.updatePreviewLogo(i, input.value.trim());
+                    }
+                }
             }
             
             resetPlayerInputs() {
