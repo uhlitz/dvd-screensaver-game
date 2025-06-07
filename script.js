@@ -34,13 +34,16 @@ class DVDCornerChallenge {
                     bottomButtons: document.getElementById('bottom-action-buttons')
                 };
                 this.elements.soundButtons = {
-                    main: document.getElementById('sound-toggle-btn')
+                    main: document.getElementById('sound-toggle-btn'),
+                    setup: document.getElementById('sound-toggle-btn-setup')
                 };
                 this.elements.soundIcons = {
-                    main: document.getElementById('sound-toggle-icon')
+                    main: document.getElementById('sound-toggle-icon'),
+                    setup: document.getElementById('sound-toggle-icon-setup')
                 };
                 this.elements.soundLabels = {
-                    main: document.getElementById('sound-toggle-label')
+                    main: document.getElementById('sound-toggle-label'),
+                    setup: document.getElementById('sound-toggle-label-setup')
                 };
             }
             
@@ -97,6 +100,12 @@ class DVDCornerChallenge {
                     if (!btn) return;
                     btn.setAttribute('aria-pressed', this.soundEnabled ? 'true' : 'false');
                 });
+
+                Object.entries(this.elements.soundIcons).forEach(([key, icon]) => {
+                    if (!icon) return;
+                    const cross = icon.querySelector('#sound-x') || icon.querySelector('#sound-x-setup');
+                    if (cross) cross.style.display = this.soundEnabled ? 'none' : 'inline';
+                });
             }
             
             playBounceSound() {
@@ -120,6 +129,30 @@ class DVDCornerChallenge {
                     oscillator.stop(this.audioContext.currentTime + 0.1);
                 } catch (e) {
                     // Silently fail if audio doesn't work
+                }
+            }
+
+            playWinnerJingle() {
+                if (!this.audioContext || !this.soundEnabled) return;
+
+                try {
+                    const oscillator = this.audioContext.createOscillator();
+                    const gainNode = this.audioContext.createGain();
+
+                    oscillator.type = 'triangle';
+                    oscillator.connect(gainNode);
+                    gainNode.connect(this.audioContext.destination);
+
+                    oscillator.frequency.setValueAtTime(440, this.audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(880, this.audioContext.currentTime + 0.2);
+
+                    gainNode.gain.setValueAtTime(0.15, this.audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.2);
+
+                    oscillator.start(this.audioContext.currentTime);
+                    oscillator.stop(this.audioContext.currentTime + 0.2);
+                } catch (e) {
+                    // Ignore audio errors
                 }
             }
             
