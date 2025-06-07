@@ -61,7 +61,9 @@ class DVDCornerChallenge {
                 
                 // Game configuration
                 this.config = {
-                    basePreviewSpeed: 4,
+                    // Use the same base speed for previews and gameplay so
+                    // there is no noticeable speed change when the game starts
+                    basePreviewSpeed: 6,
                     baseGameSpeed: 6,
                     speedMultiplier: 3, // Default speed (slider value 3)
                     baseLogo: { width: 200, height: 88 },
