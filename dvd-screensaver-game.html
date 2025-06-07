@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DVD Corner Hit Challenge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-setup">
+        <button id="fullscreen-btn" class="arcade-button arcade-button--subtle">
+            [F]
+            <span class="light-sweep"></span>
+        </button>
+        <div class="player-inputs" id="player-inputs">
+            <div class="player-input">
+                <label for="player1">Player 1:</label>
+                <input type="text" id="player1" placeholder="Enter name" maxlength="12">
+            </div>
+            <div class="player-input">
+                <label for="player2">Player 2:</label>
+                <input type="text" id="player2" placeholder="Enter name" maxlength="12">
+            </div>
+            <div class="player-input">
+                <label for="player3">Player 3:</label>
+                <input type="text" id="player3" placeholder="Enter name" maxlength="12">
+            </div>
+        </div>
+        <div class="controls-container">
+            <div class="control-group">
+                <div class="control-label">Game Speed</div>
+                <div class="slider-container">
+                    <span class="range-label">1</span>
+                    <input type="range" id="speed-slider" class="game-slider" min="1" max="5" value="3" step="1">
+                    <span class="range-label">5</span>
+                </div>
+                <div class="control-value" id="current-speed">3</div>
+            </div>
+            <div class="control-group">
+                <div class="control-label">Logo Size</div>
+                <div class="slider-container">
+                    <span class="range-label">1</span>
+                    <input type="range" id="size-slider" class="game-slider" min="1" max="5" value="3" step="1">
+                    <span class="range-label">5</span>
+                </div>
+                <div class="control-value" id="current-size">3</div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button id="add-player-btn" class="arcade-button">
+                Add Player
+                <span class="light-sweep"></span>
+            </button>
+            <button id="start-btn" class="arcade-button arcade-button--primary">
+                Start Game
+                <span class="light-sweep"></span>
+            </button>
+        </div>
+        <div class="bottom-buttons" id="setup-bottom-buttons">
+            <button id="sound-toggle-btn-setup" class="arcade-button arcade-button--subtle" aria-pressed="false">
+                <span id="sound-toggle-icon-setup">
+                    <svg width="32" height="32" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle">
+                        <g>
+                            <path d="m275.5 96-96 96h-96v128h96l96 96V96z" fill="#fff" stroke="#fff" stroke-width="32"/>
+                            <g id="sound-x-setup">
+                                <line x1="340" y1="180" x2="428" y2="268" stroke="#fff" stroke-width="32" stroke-linecap="round"/>
+                                <line x1="428" y1="180" x2="340" y2="268" stroke="#fff" stroke-width="32" stroke-linecap="round"/>
+                            </g>
+                        </g>
+                    </svg>
+                </span>
+                <span id="sound-toggle-label-setup">SOUND [S]</span>
+                <span class="light-sweep"></span>
+            </button>
+        </div>
+    </div>
+
+    <div id="container">
+        <div id="game-stats"></div>
+    </div> <!-- end #container -->
+
+    <!-- Unified bottom action buttons -->
+    <div class="bottom-buttons" id="bottom-action-buttons">
+        <button id="stop-game-btn" class="arcade-button arcade-button--subtle">
+            Stop Game
+            <span class="light-sweep"></span>
+        </button>
+        <button id="restart-btn" class="arcade-button">
+            Play Again
+            <span class="light-sweep"></span>
+        </button>
+        <button id="sound-toggle-btn" class="arcade-button arcade-button--subtle" aria-pressed="false">
+            <span id="sound-toggle-icon">
+                <svg width="32" height="32" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle">
+                    <g>
+                        <path d="m275.5 96-96 96h-96v128h96l96 96V96z" fill="#fff" stroke="#fff" stroke-width="32"/>
+                        <g id="sound-x">
+                            <line x1="340" y1="180" x2="428" y2="268" stroke="#fff" stroke-width="32" stroke-linecap="round"/>
+                            <line x1="428" y1="180" x2="340" y2="268" stroke="#fff" stroke-width="32" stroke-linecap="round"/>
+                        </g>
+                    </g>
+                </svg>
+            </span>
+            <span id="sound-toggle-label">SOUND [S]</span>
+            <span class="light-sweep"></span>
+        </button>
+    </div>
+
+    <div id="winner-overlay">
+        <div class="winner-title">WINNER!</div>
+        <div class="winner-name" id="winner-name"></div>
+        <div class="winner-bounces" id="winner-bounces"></div>
+        <div class="winner-logo-container" id="winner-logo-display"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
