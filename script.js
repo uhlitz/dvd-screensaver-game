@@ -124,9 +124,8 @@ class DVDCornerChallenge {
                 return index !== -1 ? this.SPEED_VALUES[index] : this.SPEED_VALUES[defaultIndex];
             }
 
-            updateSpeedLabel() {
-                const speed = this.knobToSpeed(this.config.speedKnob);
-                this.elements.currentSpeed.textContent = speed.toFixed(2);
+           updateSpeedLabel() {
+                this.elements.currentSpeed.textContent = this.config.speedKnob;
             }
 
             playBounceSound() {
