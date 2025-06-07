@@ -204,9 +204,9 @@ class DVDCornerChallenge {
                         e.preventDefault();
                         this.toggleSound();
                     }
-                    // ENTER starts game if not in input
+                    // ENTER starts game if not in input and game hasn't started
                     if (e.key === 'Enter' && (!active || active.tagName !== 'INPUT')) {
-                        if (this.canStartGame()) this.startGame();
+                        if (!this.state.gameStarted && this.canStartGame()) this.startGame();
                     }
                 });
                 
@@ -279,7 +279,7 @@ class DVDCornerChallenge {
                         });
                         
                         input.addEventListener('keypress', (e) => {
-                            if (e.key === 'Enter' && this.canStartGame()) {
+                            if (e.key === 'Enter' && !this.state.gameStarted && this.canStartGame()) {
                                 this.startGame();
                             }
                         });
@@ -293,9 +293,16 @@ class DVDCornerChallenge {
                 this.elements.buttons.start.disabled = !this.canStartGame();
                 this.elements.buttons.addPlayer.disabled = this.state.currentPlayerCount >= this.state.maxPlayers;
             }
-            
+
             canStartGame() {
-                return document.getElementById('player1')?.value.trim() !== '';
+                const inputs = document.querySelectorAll('input[id^="player"]');
+                let filled = 0;
+                inputs.forEach(input => {
+                    if (input.value && input.value.trim() !== '') {
+                        filled++;
+                    }
+                });
+                return filled >= 2;
             }
             
             addPlayer() {
@@ -316,7 +323,7 @@ class DVDCornerChallenge {
             }
             
             startGame() {
-                if (!this.canStartGame()) return;
+                if (this.state.gameStarted || !this.canStartGame()) return;
                 this.elements.gameSetup.classList.add('hidden');
                 this.elements.gameStats.classList.add('show');
                 // Show/hide correct buttons

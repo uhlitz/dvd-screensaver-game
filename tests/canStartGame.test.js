@@ -4,7 +4,7 @@ describe('canStartGame', () => {
   let dom;
 
   beforeEach(() => {
-    dom = new JSDOM('<!DOCTYPE html><input id="player1" />', { runScripts: 'dangerously' });
+    dom = new JSDOM('<!DOCTYPE html><input id="player1" /><input id="player2" />', { runScripts: 'dangerously' });
     global.window = dom.window;
     global.document = dom.window.document;
     jest.resetModules();
@@ -17,12 +17,13 @@ describe('canStartGame', () => {
     delete global.document;
   });
 
-  test('returns false when the input is empty', () => {
+  test('returns false when less than two names are entered', () => {
     expect(DVDCornerChallenge.prototype.canStartGame()).toBe(false);
   });
 
-  test('returns true when the input is populated', () => {
+  test('returns true when two names are entered', () => {
     document.getElementById('player1').value = 'Alice';
+    document.getElementById('player2').value = 'Bob';
     expect(DVDCornerChallenge.prototype.canStartGame()).toBe(true);
   });
 });
