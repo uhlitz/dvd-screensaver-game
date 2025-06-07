@@ -1,6 +1,6 @@
 # DVD Screensaver Game
 
-A neon-soaked browser game inspired by the classic DVD screensaver. Compete to see whose logo nails a screen corner first!
+A neon-soaked browser game inspired by the classic DVD screensaver. Open `index.html` in your browser and compete to see whose logo nails a screen corner first!
 
 ![](dvd-screensaver-game.png)
 
@@ -47,6 +47,12 @@ A neon-soaked browser game inspired by the classic DVD screensaver. Compete to s
 
 ## License
 MIT License. Free to use and modify.
+
+## Deploying to GitHub Pages
+1. Ensure the repository is on GitHub with the `index.html`, `style.css`, and `script.js` files in the root directory.
+2. In your repository, go to **Settings → Pages** and choose the **main** branch with the root folder as the source.
+3. Save the settings and GitHub Pages will publish the game at `https://<username>.github.io/<repo>/`.
+4. Push changes to `main` and the included workflow will redeploy the site automatically.
 
 ## Agentic disclaimer
 
