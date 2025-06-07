@@ -3,7 +3,7 @@
 A modern, neon-styled browser game inspired by the classic DVD screensaver, where players compete to see whose logo hits a screen corner first.
 
 ## Features
-- **Multiplayer:** Supports up to 12 players, each with a custom name and color-coded logo.
+- **Single or Multiplayer:** Supports solo play or up to 12 players, each with a custom name and color-coded logo.
 - **Animated DVD Logos:** Each player is represented by a bouncing DVD logo with their name.
 - **Corner Hit Challenge:** The first logo to hit a screen corner wins the round.
 - **Live Preview:** As players enter their names, their logo previews bounce around the screen.

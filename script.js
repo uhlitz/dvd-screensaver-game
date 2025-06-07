@@ -302,7 +302,7 @@ class DVDCornerChallenge {
                         filled++;
                     }
                 });
-                return filled >= 2;
+                return filled >= 1;
             }
             
             addPlayer() {

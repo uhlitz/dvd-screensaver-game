@@ -17,13 +17,12 @@ describe('canStartGame', () => {
     delete global.document;
   });
 
-  test('returns false when less than two names are entered', () => {
+  test('returns false when no names are entered', () => {
     expect(DVDCornerChallenge.prototype.canStartGame()).toBe(false);
   });
 
-  test('returns true when two names are entered', () => {
+  test('returns true when one name is entered', () => {
     document.getElementById('player1').value = 'Alice';
-    document.getElementById('player2').value = 'Bob';
     expect(DVDCornerChallenge.prototype.canStartGame()).toBe(true);
   });
 });
