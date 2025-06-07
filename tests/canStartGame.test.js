@@ -8,7 +8,7 @@ describe('canStartGame', () => {
     global.window = dom.window;
     global.document = dom.window.document;
     jest.resetModules();
-    require('../script.js');
+    return import('../src/game.js').then(m => { global.DVDCornerChallenge = m.default; });
   });
 
   afterEach(() => {
