@@ -1,0 +1,17 @@
+{
+  "name": "dvd-screensaver-game",
+  "version": "1.0.0",
+  "description": "A modern, neon-styled browser game inspired by the classic DVD screensaver, where players compete to see whose logo hits a screen corner first.",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest --config tests/jest.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "^29.6.4",
+    "jsdom": "^22.1.0"
+  }
+}
