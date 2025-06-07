@@ -516,6 +516,7 @@ class DVDCornerChallenge {
                     hitWall = true;
                 }
                 if (hitWall) {
+                    this.randomizeBounceAngle(preview);
                     this.changePreviewColor(preview);
                     this.addBounceEffect(preview);
                     this.playBounceSound();
@@ -579,6 +580,7 @@ class DVDCornerChallenge {
                     hitVertical = true;
                 }
                 if (hitWall) {
+                    this.randomizeBounceAngle(player);
                     // Count bounces ONLY during actual gameplay
                     player.bounces++;
                     this.changePlayerColor(player);
@@ -615,6 +617,15 @@ class DVDCornerChallenge {
             addBounceEffect(player) {
                 player.element.classList.add('bounce-effect');
                 setTimeout(() => player.element?.classList.remove('bounce-effect'), 50);
+            }
+
+            randomizeBounceAngle(obj) {
+                const speed = Math.sqrt(obj.velocityX * obj.velocityX + obj.velocityY * obj.velocityY);
+                const angle = (40 + Math.random() * 10) * (Math.PI / 180);
+                const signX = Math.sign(obj.velocityX) || 1;
+                const signY = Math.sign(obj.velocityY) || 1;
+                obj.velocityX = Math.cos(angle) * speed * signX;
+                obj.velocityY = Math.sin(angle) * speed * signY;
             }
             
             handleWin(winningPlayer) {

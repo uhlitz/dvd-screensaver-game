@@ -7,6 +7,7 @@ A neon-soaked browser game inspired by the classic DVD screensaver. Compete to s
 ## Features
 - **Solo or Multiplayer:** Play alone or with up to 12 friends, each with a custom name and color-coded logo.
 - **Bouncing DVD Logos:** Every player gets their own animated logo—complete with their name.
+- **Randomized Bounce Angles:** Each wall hit changes the logo's angle slightly (between 40° and 50°) so paths never feel identical.
 - **Corner Hit Showdown:** First logo to hit any corner wins the round.
 - **Live Logo Preview:** See your logo bounce around as you type your name.
 - **Custom Game Settings:**
