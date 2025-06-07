@@ -525,8 +525,16 @@ class DVDCornerChallenge {
             }
             
             changePreviewColor(preview) {
-                preview.colorIndex = (preview.colorIndex + 1) % this.config.playerColors.length;
-                preview.color = this.config.playerColors[preview.colorIndex];
+                // Pick a random color that's different from the current one
+                let newIndex = preview.colorIndex;
+                const total = this.config.playerColors.length;
+                if (total > 1) {
+                    while (newIndex === preview.colorIndex) {
+                        newIndex = Math.floor(Math.random() * total);
+                    }
+                }
+                preview.colorIndex = newIndex;
+                preview.color = this.config.playerColors[newIndex];
                 
                 const svgPaths = preview.element.querySelectorAll('path');
                 svgPaths.forEach(path => path.style.fill = preview.color);
@@ -588,8 +596,16 @@ class DVDCornerChallenge {
             }
             
             changePlayerColor(player) {
-                player.colorIndex = (player.colorIndex + 1) % this.config.playerColors.length;
-                player.color = this.config.playerColors[player.colorIndex];
+                // Randomly select a new color index different from the current one
+                let newIndex = player.colorIndex;
+                const total = this.config.playerColors.length;
+                if (total > 1) {
+                    while (newIndex === player.colorIndex) {
+                        newIndex = Math.floor(Math.random() * total);
+                    }
+                }
+                player.colorIndex = newIndex;
+                player.color = this.config.playerColors[newIndex];
                 
                 const svgPaths = player.element.querySelectorAll('path');
                 svgPaths.forEach(path => path.style.fill = player.color);
