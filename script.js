@@ -122,6 +122,32 @@ class DVDCornerChallenge {
                     // Silently fail if audio doesn't work
                 }
             }
+
+            playWinnerJingle() {
+                if (!this.audioContext || !this.soundEnabled) return;
+
+                try {
+                    const oscillator = this.audioContext.createOscillator();
+                    const gainNode = this.audioContext.createGain();
+
+                    oscillator.connect(gainNode);
+                    gainNode.connect(this.audioContext.destination);
+
+                    const now = this.audioContext.currentTime;
+
+                    oscillator.type = 'sine';
+                    oscillator.frequency.setValueAtTime(400, now);
+                    oscillator.frequency.linearRampToValueAtTime(800, now + 0.4);
+
+                    gainNode.gain.setValueAtTime(0.1, now);
+                    gainNode.gain.linearRampToValueAtTime(0.0, now + 0.4);
+
+                    oscillator.start(now);
+                    oscillator.stop(now + 0.4);
+                } catch (e) {
+                    // Silently fail if audio doesn't work
+                }
+            }
             
             setupEventListeners() {
                 // Button event listeners
