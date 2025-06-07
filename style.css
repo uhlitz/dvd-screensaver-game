@@ -696,7 +696,7 @@ body {
     margin-bottom: 20px;
     text-shadow: 0 0 40px rgba(255, 0, 128, 1);
     display: inline-block;
-    animation: nameFlash 2.5s ease-in-out infinite;
+    animation: nameFlash 12s ease-in-out infinite;
 }
 
 .winner-bounces {
@@ -710,6 +710,31 @@ body {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
+#winner-logo-display,
+.winner-logo-container {
+    position: relative;
+    width: 340px;
+    height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px auto;
+}
+
+.winner-logo {
+    width: 300px;
+    height: auto;
+    position: static;
+    left: unset;
+    top: unset;
+    transform: none;
+    z-index: 1002;
+    filter: drop-shadow(0 0 40px rgba(255, 107, 107, 0.8));
+    animation: logoSpin3D 3s ease-in-out infinite;
+    margin: 0 auto;
+    display: block;
+}
+
 .start-instructions {
     font-size: 24px;
     font-family: 'Orbitron', monospace;
@@ -721,6 +746,10 @@ body {
     text-shadow: 0 0 10px rgba(255,255,255,0.8);
     text-align: center;
     line-height: 1.4;
+    display: block;
+}
+
+.instructions-line {
     display: block;
 }
 
@@ -765,6 +794,28 @@ body {
 
 .winner-animation {
     animation: winnerCelebration 4s ease-out;
+}
+
+@keyframes logoSpin3D {
+    0% {
+        transform: perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px);
+    }
+
+    25% {
+        transform: perspective(1000px) rotateY(90deg) rotateX(15deg) translateZ(50px);
+    }
+
+    50% {
+        transform: perspective(1000px) rotateY(180deg) rotateX(0deg) translateZ(0px);
+    }
+
+    75% {
+        transform: perspective(1000px) rotateY(270deg) rotateX(-15deg) translateZ(50px);
+    }
+
+    100% {
+        transform: perspective(1000px) rotateY(360deg) rotateX(0deg) translateZ(0px);
+    }
 }
 
 .instructions-line-2-mobile,
