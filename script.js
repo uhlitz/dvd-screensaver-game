@@ -808,5 +808,12 @@ class DVDCornerChallenge {
             if (p1) {
                 game.updatePreviewLogo(1, p1.value.trim());
                 p1.focus();
+                // Place cursor at end of default text for quick deletion
+                const len = p1.value.length;
+                try {
+                    p1.setSelectionRange(len, len);
+                } catch (e) {
+                    // Some older browsers may not support setSelectionRange
+                }
             }
         });
