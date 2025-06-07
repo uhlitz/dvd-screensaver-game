@@ -62,7 +62,7 @@ class DVDCornerChallenge {
                     uiHidden: false,
                     winner: null,
                     currentPlayerCount: 3,
-                    maxPlayers: 12
+                    maxPlayers: 9
                 };
                 
                 // Game configuration
@@ -236,6 +236,12 @@ class DVDCornerChallenge {
                         e.preventDefault();
                         this.toggleUIVisibility();
                     }
+                    // Number keys boost players during gameplay
+                    if (/^[1-9]$/.test(e.key) && this.state.gameRunning && (!active || active.tagName !== 'INPUT')) {
+                        e.preventDefault();
+                        const idx = parseInt(e.key, 10) - 1;
+                        this.boostPlayer(idx);
+                    }
                     // ENTER triggers actions if not in input
                     if (e.key === 'Enter' && (!active || active.tagName !== 'INPUT')) {
                         // If winner screen is showing, treat ENTER as clicking "Play Again"
@@ -308,6 +314,20 @@ class DVDCornerChallenge {
                     label.style.fontSize = `${newSize}px`;
                     label.style.bottom = `-${newSize}px`;
                 });
+            }
+
+            applyPlayerSize(player) {
+                const scale = window.innerWidth < 400 ? 0.35 : 0.5;
+                const width = this.config.baseLogo.width * player.sizeKnob * scale;
+                const height = this.config.baseLogo.height * player.sizeKnob * scale;
+                player.element.style.width = `${width}px`;
+                player.element.style.height = `${height}px`;
+                const labelSize = this.config.baseLabelSize * player.sizeKnob;
+                const label = player.element.querySelector('.player-label');
+                if (label) {
+                    label.style.fontSize = `${labelSize}px`;
+                    label.style.bottom = `-${labelSize}px`;
+                }
             }
             
             toggleFullscreen() {
@@ -426,13 +446,16 @@ class DVDCornerChallenge {
                             element: preview.element,
                             x: preview.x,
                             y: preview.y,
-                            velocityX: (preview.velocityX / this.config.previewSpeed) * this.config.gameSpeed,
-                            velocityY: (preview.velocityY / this.config.previewSpeed) * this.config.gameSpeed,
+                            speedKnob: this.config.speedKnob,
+                            sizeKnob: this.config.sizeMultiplier,
+                            velocityX: (preview.velocityX / this.config.previewSpeed) * this.knobToSpeed(this.config.speedKnob),
+                            velocityY: (preview.velocityY / this.config.previewSpeed) * this.knobToSpeed(this.config.speedKnob),
                             color: preview.color,
                             colorIndex: preview.colorIndex,
                             corners: 0,
                             bounces: 0 // RESET bounces for game - don't carry over from preview
                         };
+                        this.applyPlayerSize(player);
                         
                         this.state.players.push(player);
                         this.state.previewLogos[playerData.index] = null;
@@ -441,15 +464,20 @@ class DVDCornerChallenge {
                         const player = {
                             name: playerData.name,
                             element: this.createDVDElement(playerData.name, this.config.playerColors[playerData.index]),
-                            x: Math.random() * (window.innerWidth - this.config.logoWidth),
-                            y: Math.random() * (window.innerHeight - this.config.logoHeight),
-                            velocityX: (Math.random() > 0.5 ? 1 : -1) * this.config.gameSpeed,
-                            velocityY: (Math.random() > 0.5 ? 1 : -1) * this.config.gameSpeed,
+                            speedKnob: this.config.speedKnob,
+                            sizeKnob: this.config.sizeMultiplier,
+                            x: 0,
+                            y: 0,
+                            velocityX: (Math.random() > 0.5 ? 1 : -1) * this.knobToSpeed(this.config.speedKnob),
+                            velocityY: (Math.random() > 0.5 ? 1 : -1) * this.knobToSpeed(this.config.speedKnob),
                             color: this.config.playerColors[playerData.index],
                             colorIndex: playerData.index,
                             corners: 0,
                             bounces: 0
                         };
+                        this.applyPlayerSize(player);
+                        player.x = Math.random() * (window.innerWidth - player.element.offsetWidth);
+                        player.y = Math.random() * (window.innerHeight - player.element.offsetHeight);
                         
                         this.state.players.push(player);
                         this.elements.container.appendChild(player.element);
@@ -473,18 +501,26 @@ class DVDCornerChallenge {
             }
             
             initializePlayers(playerData) {
-                this.state.players = playerData.map(data => ({
-                    name: data.name,
-                    element: this.createDVDElement(data.name, this.config.playerColors[data.index]),
-                    x: Math.random() * (window.innerWidth - this.config.logoWidth),
-                    y: Math.random() * (window.innerHeight - this.config.logoHeight),
-                    velocityX: (Math.random() > 0.5 ? 1 : -1) * this.config.gameSpeed,
-                    velocityY: (Math.random() > 0.5 ? 1 : -1) * this.config.gameSpeed,
-                    color: this.config.playerColors[data.index],
-                    colorIndex: data.index,
-                    corners: 0,
-                    bounces: 0
-                }));
+                this.state.players = playerData.map(data => {
+                    const player = {
+                        name: data.name,
+                        element: this.createDVDElement(data.name, this.config.playerColors[data.index]),
+                        speedKnob: this.config.speedKnob,
+                        sizeKnob: this.config.sizeMultiplier,
+                        x: 0,
+                        y: 0,
+                        velocityX: (Math.random() > 0.5 ? 1 : -1) * this.knobToSpeed(this.config.speedKnob),
+                        velocityY: (Math.random() > 0.5 ? 1 : -1) * this.knobToSpeed(this.config.speedKnob),
+                        color: this.config.playerColors[data.index],
+                        colorIndex: data.index,
+                        corners: 0,
+                        bounces: 0
+                    };
+                    this.applyPlayerSize(player);
+                    player.x = Math.random() * (window.innerWidth - player.element.offsetWidth);
+                    player.y = Math.random() * (window.innerHeight - player.element.offsetHeight);
+                    return player;
+                });
                 
                 this.state.players.forEach(player => {
                     this.elements.container.appendChild(player.element);
@@ -619,6 +655,8 @@ class DVDCornerChallenge {
                 const { clientWidth, clientHeight } = this.elements.container;
                 const prevX = player.x - player.velocityX;
                 const prevY = player.y - player.velocityY;
+                const w = player.element.offsetWidth || this.config.logoWidth;
+                const h = player.element.offsetHeight || this.config.logoHeight;
                 let hitWall = false;
                 let hitHorizontal = false;
                 let hitVertical = false;
@@ -628,8 +666,8 @@ class DVDCornerChallenge {
                     player.velocityX = Math.abs(player.velocityX);
                     hitWall = true;
                     hitHorizontal = true;
-                } else if (player.x + this.config.logoWidth > clientWidth && prevX + this.config.logoWidth <= clientWidth) {
-                    player.x = clientWidth - this.config.logoWidth;
+                } else if (player.x + w > clientWidth && prevX + w <= clientWidth) {
+                    player.x = clientWidth - w;
                     player.velocityX = -Math.abs(player.velocityX);
                     hitWall = true;
                     hitHorizontal = true;
@@ -639,8 +677,8 @@ class DVDCornerChallenge {
                     player.velocityY = Math.abs(player.velocityY);
                     hitWall = true;
                     hitVertical = true;
-                } else if (player.y + this.config.logoHeight > clientHeight && prevY + this.config.logoHeight <= clientHeight) {
-                    player.y = clientHeight - this.config.logoHeight;
+                } else if (player.y + h > clientHeight && prevY + h <= clientHeight) {
+                    player.y = clientHeight - h;
                     player.velocityY = -Math.abs(player.velocityY);
                     hitWall = true;
                     hitVertical = true;
@@ -692,6 +730,23 @@ class DVDCornerChallenge {
                 const signY = Math.sign(obj.velocityY) || 1;
                 obj.velocityX = Math.cos(angle) * speed * signX;
                 obj.velocityY = Math.sin(angle) * speed * signY;
+            }
+
+            boostPlayer(index) {
+                const player = this.state.players[index];
+                if (!player) return;
+                if (player.speedKnob < 11) {
+                    player.speedKnob++;
+                    const speed = this.knobToSpeed(player.speedKnob);
+                    const dirX = player.velocityX < 0 ? -1 : 1;
+                    const dirY = player.velocityY < 0 ? -1 : 1;
+                    player.velocityX = speed * dirX;
+                    player.velocityY = speed * dirY;
+                }
+                if (player.sizeKnob < 11) {
+                    player.sizeKnob++;
+                    this.applyPlayerSize(player);
+                }
             }
             
             handleWin(winningPlayer) {

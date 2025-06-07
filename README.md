@@ -5,7 +5,7 @@ A neon-soaked browser game inspired by the classic DVD screensaver. Open `index.
 ![](dvd-screensaver-game.png)
 
 ## Features
-- **Solo or Multiplayer:** Play alone or with up to 12 friends, each with a custom name and color-coded logo.
+- **Solo or Multiplayer:** Play alone or with up to 9 friends, each with a custom name and color-coded logo.
 - **Bouncing DVD Logos:** Every player gets their own animated logo—complete with their name.
 - **Randomized Bounce Angles:** Each wall hit changes the logo's angle slightly (between 40° and 50°) so paths never feel identical.
 - **Corner Hit Showdown:** First logo to hit any corner wins the round.
@@ -20,7 +20,7 @@ A neon-soaked browser game inspired by the classic DVD screensaver. Open `index.
 
 ## How to Play
 1. Enter at least one player name.
-2. (Optional) Add more players (up to 12).
+2. (Optional) Add more players (up to 9).
 3. Tweak speed and logo size if you want.
 4. Hit **Start Game**.
 5. Watch the logos bounce—first to a corner wins!
@@ -28,7 +28,8 @@ A neon-soaked browser game inspired by the classic DVD screensaver. Open `index.
 
 ## Controls
 - **'F' key:** Toggle fullscreen.
-- **Add Player:** Add another player (up to 12).
+- **Add Player:** Add another player (up to 9).
+- **Number Keys 1-9:** Boost the matching player's size and speed during a round.
 - **Start Game:** Begin the challenge.
 - **Stop Game:** End the round and return to setup.
 - **Play Again:** Rematch after a win.
