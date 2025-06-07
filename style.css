@@ -416,12 +416,15 @@ body {
     appearance: none;
     width: 20px;
     height: 20px;
+    margin-top: -6px;
     background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
     border: 2px solid var(--neon-cyan);
     cursor: pointer;
     transition: all 0.2s ease;
     clip-path: polygon(4px 0%, 100% 0%, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0% 100%, 0% 4px);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+    position: relative;
+    z-index: 2;
 }
 
 .game-slider::-webkit-slider-thumb:hover {
@@ -440,6 +443,9 @@ body {
     clip-path: polygon(4px 0%, 100% 0%, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0% 100%, 0% 4px);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
     border-radius: 0;
+    position: relative;
+    z-index: 2;
+    transform: translateY(-6px);
 }
 
 .game-slider::-moz-range-thumb:hover {
