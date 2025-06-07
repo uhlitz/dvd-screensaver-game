@@ -695,6 +695,7 @@ body {
     letter-spacing: 6px;
     margin-bottom: 20px;
     text-shadow: 0 0 40px rgba(255, 0, 128, 1);
+    display: inline-block;
     animation: nameFlash 1.5s ease-in-out infinite;
 }
 
@@ -723,8 +724,34 @@ body {
     display: block;
 }
 
-.instructions-line {
-    display: block;
+/* Animations */
+@keyframes titleGlow {
+    0% {
+        text-shadow: 0 0 30px rgba(0, 255, 255, 1);
+    }
+
+    100% {
+        text-shadow: 0 0 50px rgba(0, 255, 255, 1), 0 0 60px rgba(0, 255, 255, 0.8);
+    }
+}
+
+@keyframes nameFlash {
+    0%,
+    100% {
+        color: var(--neon-pink);
+        text-shadow: 0 0 40px rgba(255, 0, 128, 1);
+        transform: scale(1);
+    }
+
+    50% {
+        color: var(--neon-cyan);
+        text-shadow: 0 0 40px rgba(0, 255, 255, 1);
+        transform: scale(1.1);
+    }
+}
+
+.winner-animation {
+    animation: winnerCelebration 4s ease-out;
 }
 
 .instructions-line-2-mobile,

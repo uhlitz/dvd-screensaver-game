@@ -70,9 +70,11 @@ class DVDCornerChallenge {
                     // Slider knob position (value from KNOB_POSITIONS)
                     speedKnob: this.DEFAULT_KNOB,
                     baseLogo: { width: 200, height: 88 },
+                    baseLabelSize: 12,
                     sizeMultiplier: 3, // Default size (slider value 3)
                     logoWidth: 200,
                     logoHeight: 88,
+                    labelFontSize: 12,
                     playerColors: [
                         '#00ffff', '#ff0080', '#00ff00', '#ffff00', 
                         '#ff4000', '#8000ff', '#ff0040', '#40ff00',
@@ -274,6 +276,8 @@ class DVDCornerChallenge {
                 const scale = window.innerWidth < 400 ? 0.35 : 0.5;
                 this.config.logoWidth = this.config.baseLogo.width * this.config.sizeMultiplier * scale;
                 this.config.logoHeight = this.config.baseLogo.height * this.config.sizeMultiplier * scale;
+                this.config.labelFontSize = this.config.baseLabelSize * this.config.sizeMultiplier;
+                this.updatePlayerLabelSizes();
             }
             
             updatePreviewSpeeds() {
@@ -295,6 +299,13 @@ class DVDCornerChallenge {
                     if (preview) {
                         preview.element.style.width = `${this.config.logoWidth}px`;
                     }
+                });
+            }
+
+            updatePlayerLabelSizes() {
+                const newSize = this.config.labelFontSize;
+                document.querySelectorAll('.player-label').forEach(label => {
+                    label.style.fontSize = `${newSize}px`;
                 });
             }
             
@@ -494,6 +505,10 @@ class DVDCornerChallenge {
                     <div class="player-label">${playerName}</div>
                 `;
                 logoDiv.style.filter = `drop-shadow(0 0 20px ${color}80)`;
+                const label = logoDiv.querySelector('.player-label');
+                if (label) {
+                    label.style.fontSize = `${this.config.labelFontSize}px`;
+                }
                 return logoDiv;
             }
             
