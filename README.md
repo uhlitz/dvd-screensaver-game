@@ -10,7 +10,7 @@ A modern, neon-styled browser game inspired by the classic DVD screensaver, wher
 - **Customizable Game Settings:**
   - **Game Speed:** Adjustable via slider (1-5).
   - **Logo Size:** Adjustable via slider (1-5).
-- **Neon Arcade UI:** Stylish, animated buttons and overlays with neon effects.r
+- **Neon Arcade UI:** Stylish, animated buttons and overlays with neon effects.
 - **Fullscreen Mode:** Toggle fullscreen for an immersive experience (F11 button or 'F' key).
 - **Sound Effects:** Audio feedback on logo bounces (Web Audio API).
 - **Victory Overlay:** Animated winner announcement with stats and replay option.
