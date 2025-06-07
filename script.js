@@ -126,8 +126,6 @@ class DVDCornerChallenge {
                 }
                 const stepsAbove = 11 - this.DEFAULT_KNOB;
                 return DEFAULT_SPEED + (k - this.DEFAULT_KNOB) * (this.MAX_SPEED - DEFAULT_SPEED) / stepsAbove;
-                const STEPS = 10; // positions 1-11 => 10 steps
-                return this.MIN_SPEED + (k - 1) * (this.MAX_SPEED - this.MIN_SPEED) / STEPS;
             }
 
             updateSpeedLabel() {
