@@ -353,7 +353,11 @@ class DVDCornerChallenge {
                         // Convert existing preview to game player
                         preview.element.classList.remove('preview-logo');
                         preview.element.style.opacity = '1';
-                        
+                        if (preview.animationFrameId) {
+                            cancelAnimationFrame(preview.animationFrameId);
+                        }
+                        preview.cancelled = true;
+
                         const player = {
                             name: preview.name,
                             element: preview.element,
@@ -368,6 +372,7 @@ class DVDCornerChallenge {
                         };
                         
                         this.state.players.push(player);
+                        this.state.previewLogos[playerData.index] = null;
                     } else {
                         // Create new player if no preview exists
                         const player = {
@@ -473,12 +478,16 @@ class DVDCornerChallenge {
                     if (existingPreview.element.parentNode) {
                         existingPreview.element.parentNode.removeChild(existingPreview.element);
                     }
+                    if (existingPreview.animationFrameId) {
+                        cancelAnimationFrame(existingPreview.animationFrameId);
+                    }
+                    existingPreview.cancelled = true;
                     this.state.previewLogos[playerNum - 1] = null;
                 }
             }
             
             animatePreview(preview) {
-                if (!preview?.element.parentNode) return;
+                if (!preview?.element.parentNode || preview.cancelled) return;
                 const prevX = preview.x;
                 const prevY = preview.y;
                 preview.x += preview.velocityX;
@@ -510,7 +519,7 @@ class DVDCornerChallenge {
                     this.playBounceSound();
                 }
                 this.updatePosition(preview);
-                requestAnimationFrame(() => this.animatePreview(preview));
+                preview.animationFrameId = requestAnimationFrame(() => this.animatePreview(preview));
             }
             
             changePreviewColor(preview) {
@@ -716,9 +725,14 @@ class DVDCornerChallenge {
             
             clearPreviewLogos() {
                 for (let i = 0; i < this.state.maxPlayers; i++) {
-                    if (this.state.previewLogos[i]?.element.parentNode) {
-                        this.state.previewLogos[i].element.parentNode.removeChild(this.state.previewLogos[i].element);
+                    const prev = this.state.previewLogos[i];
+                    if (prev?.element.parentNode) {
+                        prev.element.parentNode.removeChild(prev.element);
                     }
+                    if (prev?.animationFrameId) {
+                        cancelAnimationFrame(prev.animationFrameId);
+                    }
+                    if (prev) prev.cancelled = true;
                 }
                 this.state.previewLogos = [];
             }
