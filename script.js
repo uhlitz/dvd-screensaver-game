@@ -790,6 +790,12 @@ class DVDCornerChallenge {
         // Initialize game when page loads
         window.addEventListener('load', () => {
             const p1 = document.getElementById('player1');
-            if (p1) p1.focus();
-            new DVDCornerChallenge();
+            if (p1) {
+                p1.value = 'GOOD VIBES';
+            }
+            const game = new DVDCornerChallenge();
+            if (p1) {
+                game.updatePreviewLogo(1, p1.value.trim());
+                p1.focus();
+            }
         });
