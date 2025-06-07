@@ -139,21 +139,27 @@ class DVDCornerChallenge {
                 if (!this.audioContext || !this.soundEnabled) return;
 
                 try {
-                    const oscillator = this.audioContext.createOscillator();
-                    const gainNode = this.audioContext.createGain();
+                    // A quick arcade-style melody (C5 -> E5 -> G5 -> C6)
+                    const notes = [523.25, 659.25, 783.99, 1046.5];
+                    const noteDuration = 0.18;
+                    const now = this.audioContext.currentTime;
 
-                    oscillator.type = 'triangle';
-                    oscillator.connect(gainNode);
-                    gainNode.connect(this.audioContext.destination);
+                    notes.forEach((freq, idx) => {
+                        const oscillator = this.audioContext.createOscillator();
+                        const gainNode = this.audioContext.createGain();
 
-                    oscillator.frequency.setValueAtTime(440, this.audioContext.currentTime);
-                    oscillator.frequency.exponentialRampToValueAtTime(880, this.audioContext.currentTime + 0.2);
+                        oscillator.type = 'triangle';
+                        oscillator.frequency.setValueAtTime(freq, now + idx * noteDuration);
 
-                    gainNode.gain.setValueAtTime(0.15, this.audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.2);
+                        oscillator.connect(gainNode);
+                        gainNode.connect(this.audioContext.destination);
 
-                    oscillator.start(this.audioContext.currentTime);
-                    oscillator.stop(this.audioContext.currentTime + 0.2);
+                        gainNode.gain.setValueAtTime(0.15, now + idx * noteDuration);
+                        gainNode.gain.exponentialRampToValueAtTime(0.001, now + (idx + 1) * noteDuration);
+
+                        oscillator.start(now + idx * noteDuration);
+                        oscillator.stop(now + (idx + 1) * noteDuration);
+                    });
                 } catch (e) {
                     // Ignore audio errors
                 }
