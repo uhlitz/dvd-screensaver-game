@@ -850,3 +850,61 @@ body {
     }
 }
 
+@media (max-width: 400px) {
+    :root {
+        --button-height: 40px;
+        --button-width: 120px;
+        --border-width: 2px;
+    }
+    .arcade-button {
+        font-size: 12px;
+    }
+    .arcade-button--primary {
+        font-size: 16px;
+    }
+    #fullscreen-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 10px;
+    }
+    .bottom-buttons button,
+    #bottom-action-buttons button,
+    #stop-game-btn,
+    #restart-btn,
+    #sound-toggle-btn {
+        width: 120px;
+        min-width: 120px;
+        height: 40px;
+        font-size: 12px;
+    }
+    .game-slider {
+        width: 120px;
+    }
+    .control-label,
+    .player-input label {
+        font-size: 12px;
+    }
+    .player-input input {
+        width: 150px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    .control-value {
+        font-size: 14px;
+    }
+    .winner-title {
+        font-size: 32px;
+    }
+    .winner-name {
+        font-size: 40px;
+    }
+    #winner-logo-display,
+    .winner-logo-container {
+        width: 200px;
+        height: 200px;
+    }
+    .winner-logo {
+        width: 160px;
+    }
+}
+

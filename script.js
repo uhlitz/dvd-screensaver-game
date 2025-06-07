@@ -247,8 +247,9 @@ class DVDCornerChallenge {
             }
             
             updateSizes() {
-                this.config.logoWidth = this.config.baseLogo.width * this.config.sizeMultiplier * 0.5;
-                this.config.logoHeight = this.config.baseLogo.height * this.config.sizeMultiplier * 0.5;
+                const scale = window.innerWidth < 400 ? 0.35 : 0.5;
+                this.config.logoWidth = this.config.baseLogo.width * this.config.sizeMultiplier * scale;
+                this.config.logoHeight = this.config.baseLogo.height * this.config.sizeMultiplier * scale;
             }
             
             updatePreviewSpeeds() {
