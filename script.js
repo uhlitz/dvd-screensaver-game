@@ -1,5 +1,6 @@
 class DVDCornerChallenge {
             constructor() {
+                this.MAX_SPEED_MULTIPLIER = 20; // Speed 11 is 20x faster than speed 1
                 this.initializeElements();
                 this.initializeGame();
                 this.setupEventListeners();
@@ -64,8 +65,8 @@ class DVDCornerChallenge {
                 this.config = {
                     // Use the same base speed for previews and gameplay so
                     // there is no noticeable speed change when the game starts
-                    basePreviewSpeed: 6,
-                    baseGameSpeed: 6,
+                    basePreviewSpeed: 1,
+                    baseGameSpeed: 1,
                     speedMultiplier: 3, // Default speed (slider value 3)
                     baseLogo: { width: 200, height: 88 },
                     sizeMultiplier: 3, // Default size (slider value 3)
@@ -248,8 +249,13 @@ class DVDCornerChallenge {
             }
             
             updateSpeeds() {
-                this.config.previewSpeed = this.config.basePreviewSpeed * this.config.speedMultiplier * 0.5;
-                this.config.gameSpeed = this.config.baseGameSpeed * this.config.speedMultiplier * 0.5;
+                // Linear mapping: speed 1 = 1x, speed 11 = MAX_SPEED_MULTIPLIER x
+                // speed = 1 + (sliderValue - 1) * (MAX_SPEED_MULTIPLIER - 1) / (maxSlider - 1)
+                const sliderValue = this.config.speedMultiplier;
+                const maxSlider = 11;
+                const speedFactor = 1 + (sliderValue - 1) * (this.MAX_SPEED_MULTIPLIER - 1) / (maxSlider - 1);
+                this.config.previewSpeed = this.config.basePreviewSpeed * speedFactor;
+                this.config.gameSpeed = this.config.baseGameSpeed * speedFactor;
             }
             
             updateSizes() {
@@ -844,7 +850,7 @@ class DVDCornerChallenge {
         window.addEventListener('load', () => {
             const p1 = document.getElementById('player1');
             if (p1) {
-                p1.value = 'GOOD VIBES';
+                p1.value = 'VIDEO';
             }
             const game = new DVDCornerChallenge();
             if (p1) {
