@@ -877,7 +877,7 @@ class DVDCornerChallenge {
         window.addEventListener('load', () => {
             const p1 = document.getElementById('player1');
             if (p1) {
-                p1.value = 'VIDEO';
+                p1.value = 'Player 1';
             }
             const game = new DVDCornerChallenge();
             if (p1) {

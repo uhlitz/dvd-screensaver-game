@@ -710,27 +710,17 @@ body {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
-#winner-logo-display, .winner-logo-container {
-    position: relative;
-    width: 340px;
-    height: 340px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 30px auto;
-}
-
-.winner-logo {
-    width: 300px;
-    height: auto;
-    position: static;
-    left: unset;
-    top: unset;
-    transform: none;
-    z-index: 1002;
-    filter: drop-shadow(0 0 40px rgba(255, 107, 107, 0.8));
-    animation: logoSpin3D 3s ease-in-out infinite;
-    margin: 0 auto;
+.start-instructions {
+    font-size: 24px;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 36px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    text-align: center;
+    line-height: 1.4;
     display: block;
 }
 
@@ -764,28 +754,10 @@ body {
     animation: winnerCelebration 4s ease-out;
 }
 
-@keyframes logoSpin3D {
-    0% {
-        transform: perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0px);
-    }
-
-    25% {
-        transform: perspective(1000px) rotateY(90deg) rotateX(15deg) translateZ(50px);
-    }
-
-    50% {
-        transform: perspective(1000px) rotateY(180deg) rotateX(0deg) translateZ(0px);
-    }
-
-    75% {
-        transform: perspective(1000px) rotateY(270deg) rotateX(-15deg) translateZ(50px);
-    }
-
-    100% {
-        transform: perspective(1000px) rotateY(360deg) rotateX(0deg) translateZ(0px);
-    }
+.instructions-line-2-mobile,
+.instructions-line-3-mobile {
+    display: none;
 }
-
 
 @media (max-width: 600px) {
     :root {
@@ -800,9 +772,7 @@ body {
         font-size: 16px;
     }
     #fullscreen-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 12px;
+        display: none !important;
     }
     .bottom-buttons button,
     #bottom-action-buttons button,
@@ -856,6 +826,26 @@ body {
     .winner-logo {
         width: 200px;
     }
+    .start-instructions {
+        font-size: 14px;
+        margin-bottom: 18px;
+        margin-top: 0;
+    }
+    .instructions-line-1 {
+        display: block;
+        margin-bottom: 2px;
+    }
+    .instructions-line-2 {
+        display: none;
+    }
+    .instructions-line-2-mobile,
+    .instructions-line-3-mobile {
+        display: block;
+        margin-bottom: 2px;
+    }
+    #game-setup {
+        padding-top: 10px;
+    }
 }
 
 @media (max-width: 400px) {
@@ -871,9 +861,7 @@ body {
         font-size: 14px;
     }
     #fullscreen-btn {
-        width: 26px;
-        height: 26px;
-        font-size: 9px;
+        display: none !important;
     }
     .bottom-buttons button,
     #bottom-action-buttons button,
@@ -926,6 +914,26 @@ body {
     }
     .winner-logo {
         width: 160px;
+    }
+    .start-instructions {
+        font-size: 11px;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+    .instructions-line-1 {
+        display: block;
+        margin-bottom: 1px;
+    }
+    .instructions-line-2 {
+        display: none;
+    }
+    .instructions-line-2-mobile,
+    .instructions-line-3-mobile {
+        display: block;
+        margin-bottom: 1px;
+    }
+    #game-setup {
+        padding-top: 4px;
     }
 }
 
