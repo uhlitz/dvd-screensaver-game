@@ -3,9 +3,6 @@ class DVDCornerChallenge {
                 this.MIN_SPEED = 0.01; // Speed when the knob is at 1
                 this.MAX_SPEED = 20; // Speed when the knob is at 11
                 this.DEFAULT_KNOB = 6; // Default knob position (speed 1)
-                this.MIN_SPEED = 1; // Speed when the knob is at 1
-                this.MAX_SPEED = 20; // Speed when the knob is at 11
-                this.DEFAULT_KNOB = 3; // Default knob position
                 this.initializeElements();
                 this.initializeGame();
                 this.setupEventListeners();
@@ -89,10 +86,6 @@ class DVDCornerChallenge {
 
                 this.updateSpeeds();
                 this.updateSizes();
-
-                // Sync sliders with configured defaults
-                this.elements.speedSlider.value = this.config.speedKnob;
-                this.elements.currentSpeed.textContent = this.config.speedKnob;
             }
             
             initializeAudio() {
@@ -129,8 +122,6 @@ class DVDCornerChallenge {
                 }
                 const stepsAbove = 11 - this.DEFAULT_KNOB;
                 return DEFAULT_SPEED + (k - this.DEFAULT_KNOB) * (this.MAX_SPEED - DEFAULT_SPEED) / stepsAbove;
-                const STEPS = 10; // positions 1-11 => 10 steps
-                return this.MIN_SPEED + (k - 1) * (this.MAX_SPEED - this.MIN_SPEED) / STEPS;
             }
 
             updateSpeedLabel() {
