@@ -10,7 +10,7 @@ A modern, neon-styled browser game inspired by the classic DVD screensaver, wher
 - **Customizable Game Settings:**
   - **Game Speed:** Adjustable via slider (1-5).
   - **Logo Size:** Adjustable via slider (1-5).
-- **Neon Arcade UI:** Stylish, animated buttons and overlays with neon effects.r
+- **Neon Arcade UI:** Stylish, animated buttons and overlays with neon effects.
 - **Fullscreen Mode:** Toggle fullscreen for an immersive experience (F11 button or 'F' key).
 - **Sound Effects:** Audio feedback on logo bounces (Web Audio API).
 - **Victory Overlay:** Animated winner announcement with stats and replay option.
@@ -31,7 +31,7 @@ A modern, neon-styled browser game inspired by the classic DVD screensaver, wher
 - **Play Again:** Restart after a win.
 
 ## Technical Overview
-- **Single HTML file:** All logic, styles, and markup are contained in `dvd-screensaver-game.html`.
+- **Separated files:** Markup, styles, and script are split across `dvd-screensaver-game.html`, `style.css`, and `script.js`.
 - **No dependencies:** Pure HTML, CSS, and JavaScript.
 - **Responsive:** Adapts to window resizing and fullscreen.
 - **Modern CSS:** Uses CSS variables, gradients, and custom animations for a retro-futuristic look.
