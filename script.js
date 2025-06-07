@@ -306,6 +306,7 @@ class DVDCornerChallenge {
                 const newSize = this.config.labelFontSize;
                 document.querySelectorAll('.player-label').forEach(label => {
                     label.style.fontSize = `${newSize}px`;
+                    label.style.bottom = `-${newSize}px`;
                 });
             }
             
@@ -508,6 +509,7 @@ class DVDCornerChallenge {
                 const label = logoDiv.querySelector('.player-label');
                 if (label) {
                     label.style.fontSize = `${this.config.labelFontSize}px`;
+                    label.style.bottom = `-${this.config.labelFontSize}px`;
                 }
                 return logoDiv;
             }
