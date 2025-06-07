@@ -1,8 +1,10 @@
 class DVDCornerChallenge {
             constructor() {
-                this.MIN_SPEED = 0.01; // Speed when the knob is at 1
-                this.MAX_SPEED = 20; // Speed when the knob is at 11
-                this.DEFAULT_KNOB = 6; // Default knob position (speed 1)
+                // Discrete speed mapping
+                this.KNOB_POSITIONS = [1, 2, 3, 4, 5];
+                this.SPEED_VALUES = [0.5, 1, 2, 4, 8];
+                // Default knob position (matches an entry in KNOB_POSITIONS)
+                this.DEFAULT_KNOB = 3;
                 this.initializeElements();
                 this.initializeGame();
                 this.setupEventListeners();
@@ -65,7 +67,7 @@ class DVDCornerChallenge {
                 
                 // Game configuration
                 this.config = {
-                    // Slider knob position (1-11)
+                    // Slider knob position (value from KNOB_POSITIONS)
                     speedKnob: this.DEFAULT_KNOB,
                     baseLogo: { width: 200, height: 88 },
                     sizeMultiplier: 3, // Default size (slider value 3)
@@ -80,8 +82,10 @@ class DVDCornerChallenge {
                 
                 // Initialize audio context
                 this.initializeAudio();
-                
+
                 // Sync sliders with configured defaults
+                this.elements.speedSlider.min = this.KNOB_POSITIONS[0];
+                this.elements.speedSlider.max = this.KNOB_POSITIONS[this.KNOB_POSITIONS.length - 1];
                 this.elements.speedSlider.value = this.config.speedKnob;
 
                 this.updateSpeeds();
@@ -115,13 +119,9 @@ class DVDCornerChallenge {
             }
 
             knobToSpeed(k) {
-                const DEFAULT_SPEED = 1;
-                if (k <= this.DEFAULT_KNOB) {
-                    const stepsBelow = this.DEFAULT_KNOB - 1;
-                    return this.MIN_SPEED + (k - 1) * (DEFAULT_SPEED - this.MIN_SPEED) / stepsBelow;
-                }
-                const stepsAbove = 11 - this.DEFAULT_KNOB;
-                return DEFAULT_SPEED + (k - this.DEFAULT_KNOB) * (this.MAX_SPEED - DEFAULT_SPEED) / stepsAbove;
+                const index = this.KNOB_POSITIONS.indexOf(Number(k));
+                const defaultIndex = this.KNOB_POSITIONS.indexOf(this.DEFAULT_KNOB);
+                return index !== -1 ? this.SPEED_VALUES[index] : this.SPEED_VALUES[defaultIndex];
             }
 
             updateSpeedLabel() {
