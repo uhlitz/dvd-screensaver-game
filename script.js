@@ -1,7 +1,8 @@
 class DVDCornerChallenge {
             constructor() {
-                this.MIN_SPEED = 1; // Speed when the slider is at 1
-                this.MAX_SPEED = 20; // Speed when the slider is at 11
+                this.MIN_SPEED = 0.01; // Speed when the knob is at 1
+                this.MAX_SPEED = 20; // Speed when the knob is at 11
+                this.DEFAULT_KNOB = 6; // Default knob position (speed 1)
                 this.initializeElements();
                 this.initializeGame();
                 this.setupEventListeners();
@@ -64,8 +65,8 @@ class DVDCornerChallenge {
                 
                 // Game configuration
                 this.config = {
-                    // Slider value for speed control (1-11)
-                    speedMultiplier: 3, // Default speed (slider value 3)
+                    // Slider knob position (1-11)
+                    speedKnob: this.DEFAULT_KNOB,
                     baseLogo: { width: 200, height: 88 },
                     sizeMultiplier: 3, // Default size (slider value 3)
                     logoWidth: 200,
@@ -80,6 +81,9 @@ class DVDCornerChallenge {
                 // Initialize audio context
                 this.initializeAudio();
                 
+                // Sync sliders with configured defaults
+                this.elements.speedSlider.value = this.config.speedKnob;
+
                 this.updateSpeeds();
                 this.updateSizes();
             }
@@ -108,6 +112,21 @@ class DVDCornerChallenge {
                     const cross = icon.querySelector('#sound-x') || icon.querySelector('#sound-x-setup');
                     if (cross) cross.style.display = this.soundEnabled ? 'none' : 'inline';
                 });
+            }
+
+            knobToSpeed(k) {
+                const DEFAULT_SPEED = 1;
+                if (k <= this.DEFAULT_KNOB) {
+                    const stepsBelow = this.DEFAULT_KNOB - 1;
+                    return this.MIN_SPEED + (k - 1) * (DEFAULT_SPEED - this.MIN_SPEED) / stepsBelow;
+                }
+                const stepsAbove = 11 - this.DEFAULT_KNOB;
+                return DEFAULT_SPEED + (k - this.DEFAULT_KNOB) * (this.MAX_SPEED - DEFAULT_SPEED) / stepsAbove;
+            }
+
+            updateSpeedLabel() {
+                const speed = this.knobToSpeed(this.config.speedKnob);
+                this.elements.currentSpeed.textContent = speed.toFixed(2);
             }
             
             playBounceSound() {
@@ -181,8 +200,7 @@ class DVDCornerChallenge {
                 
                 // Speed slider event listener
                 this.elements.speedSlider.addEventListener('input', (e) => {
-                    this.config.speedMultiplier = parseInt(e.target.value);
-                    this.elements.currentSpeed.textContent = this.config.speedMultiplier;
+                    this.config.speedKnob = parseInt(e.target.value);
                     this.updateSpeeds();
                     this.updatePreviewSpeeds();
                 });
@@ -247,12 +265,10 @@ class DVDCornerChallenge {
             }
             
             updateSpeeds() {
-                // Linear mapping: slider 1 => MIN_SPEED, slider 11 => MAX_SPEED
-                const sliderValue = this.config.speedMultiplier;
-                const maxSlider = 11;
-                const speed = this.MIN_SPEED + (sliderValue - 1) * (this.MAX_SPEED - this.MIN_SPEED) / (maxSlider - 1);
+                const speed = this.knobToSpeed(this.config.speedKnob);
                 this.config.previewSpeed = speed;
                 this.config.gameSpeed = speed;
+                this.updateSpeedLabel();
             }
             
             updateSizes() {
