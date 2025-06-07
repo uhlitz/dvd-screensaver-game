@@ -397,17 +397,34 @@ body {
     appearance: none;
 }
 
+.game-slider::-webkit-slider-runnable-track {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid var(--neon-cyan);
+    clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
+}
+
+.game-slider::-moz-range-track {
+    height: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid var(--neon-cyan);
+    clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
+}
+
 .game-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
+    margin-top: -6px;
     background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
     border: 2px solid var(--neon-cyan);
     cursor: pointer;
     transition: all 0.2s ease;
     clip-path: polygon(4px 0%, 100% 0%, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0% 100%, 0% 4px);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+    position: relative;
+    z-index: 2;
 }
 
 .game-slider::-webkit-slider-thumb:hover {
@@ -417,8 +434,8 @@ body {
 }
 
 .game-slider::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
     border: 2px solid var(--neon-cyan);
     cursor: pointer;
@@ -426,6 +443,9 @@ body {
     clip-path: polygon(4px 0%, 100% 0%, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0% 100%, 0% 4px);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
     border-radius: 0;
+    position: relative;
+    z-index: 2;
+    transform: translateY(-6px);
 }
 
 .game-slider::-moz-range-thumb:hover {
