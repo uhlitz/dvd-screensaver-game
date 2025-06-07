@@ -1,10 +1,10 @@
 class DVDCornerChallenge {
             constructor() {
                 // Discrete speed mapping
-                this.KNOB_POSITIONS = [1, 2, 3, 4, 5];
-                this.SPEED_VALUES = [0.5, 1, 2, 4, 8];
+                this.KNOB_POSITIONS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+                this.SPEED_VALUES = [0.0625, 0.125, 0.25, 0.5, 1, 2, 4, 8, 16, 32, 64];
                 // Default knob position (matches an entry in KNOB_POSITIONS)
-                this.DEFAULT_KNOB = 3;
+                this.DEFAULT_KNOB = 6;
                 this.initializeElements();
                 this.initializeGame();
                 this.setupEventListeners();
