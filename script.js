@@ -218,9 +218,15 @@ class DVDCornerChallenge {
                         e.preventDefault();
                         this.toggleUIVisibility();
                     }
-                    // ENTER starts game if not in input and game hasn't started
+                    // ENTER triggers actions if not in input
                     if (e.key === 'Enter' && (!active || active.tagName !== 'INPUT')) {
-                        if (!this.state.gameStarted && this.canStartGame()) this.startGame();
+                        // If winner screen is showing, treat ENTER as clicking "Play Again"
+                        if (this.elements.winnerOverlay.classList.contains('show')) {
+                            e.preventDefault();
+                            this.restartGame();
+                        } else if (!this.state.gameStarted && this.canStartGame()) {
+                            this.startGame();
+                        }
                     }
                 });
                 
