@@ -474,30 +474,30 @@ body {
     position: fixed;
     bottom: 50px;
     left: 50%;
-    transform: translateX(-50%);
     z-index: 250;
     display: none;
+    transform: none;
 }
 
 #restart-btn:hover {
-    transform: translateX(-50%) translateY(-2px);
+    transform: translateY(-2px);
 }
 
 #restart-btn:active {
-    transform: translateX(-50%) translateY(2px);
+    transform: translateY(2px);
 }
 
 #stop-game-btn {
     position: fixed;
     bottom: 20px;
     left: 50%;
-    transform: translateX(-50%);
     z-index: 50;
     display: none;
+    transform: none;
 }
 
 #stop-game-btn:active {
-    transform: translateX(-50%) translateY(1px);
+    transform: translateY(1px);
 }
 
 .bottom-buttons {
