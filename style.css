@@ -21,7 +21,8 @@ body {
     background: #000;
     overflow: hidden;
     font-family: 'Orbitron', monospace;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100dvh;
 }
 
 /* Unified Button System with Corner Outlines */
@@ -262,7 +263,8 @@ body {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100dvh;
     background: rgba(26, 26, 26, 0.3);
     backdrop-filter: blur(3px);
     display: flex;
@@ -582,7 +584,8 @@ body {
 /* Game elements */
 #container {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100dvh;
     position: relative;
     background: #000;
 }
@@ -658,7 +661,8 @@ body {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100dvh;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(20px);
     z-index: 200;
@@ -909,6 +913,7 @@ body {
     }
     #game-setup {
         padding-top: 10px;
+        padding-bottom: 10px;
     }
 }
 
@@ -998,6 +1003,7 @@ body {
     }
     #game-setup {
         padding-top: 4px;
+        padding-bottom: 4px;
     }
 }
 
