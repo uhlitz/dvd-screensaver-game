@@ -669,6 +669,11 @@ class DVDCornerChallenge {
             }
             
             showWinnerScreen(winner) {
+                // Ensure UI is visible when showing the winner screen
+                this.state.uiHidden = false;
+                this.elements.bottomButtons.classList.remove('ui-hidden');
+                this.elements.gameStats.classList.remove('ui-hidden');
+
                 // Show the overlay
                 this.elements.winnerOverlay.classList.add('show');
                 this.elements.winnerOverlay.classList.add('winner-animation');
