@@ -696,7 +696,7 @@ body {
     margin-bottom: 20px;
     text-shadow: 0 0 40px rgba(255, 0, 128, 1);
     display: inline-block;
-    animation: nameFlash 1.5s ease-in-out infinite;
+    animation: nameFlash 2.5s ease-in-out infinite;
 }
 
 .winner-bounces {
@@ -736,17 +736,30 @@ body {
 }
 
 @keyframes nameFlash {
-    0%,
-    100% {
-        color: var(--neon-pink);
-        text-shadow: 0 0 40px rgba(255, 0, 128, 1);
+    0% {
+        color: #00ffff;
+        text-shadow: 0 0 40px #00ffff;
         transform: scale(1);
     }
-
+    8.33% { color: #ff0080; text-shadow: 0 0 40px #ff0080; }
+    16.66% { color: #00ff00; text-shadow: 0 0 40px #00ff00; }
+    25% { color: #ffff00; text-shadow: 0 0 40px #ffff00; }
+    33.33% { color: #ff4000; text-shadow: 0 0 40px #ff4000; }
+    41.66% { color: #8000ff; text-shadow: 0 0 40px #8000ff; }
     50% {
-        color: var(--neon-cyan);
-        text-shadow: 0 0 40px rgba(0, 255, 255, 1);
+        color: #ff0040;
+        text-shadow: 0 0 40px #ff0040;
         transform: scale(1.1);
+    }
+    58.33% { color: #40ff00; text-shadow: 0 0 40px #40ff00; }
+    66.66% { color: #0080ff; text-shadow: 0 0 40px #0080ff; }
+    75% { color: #ff8000; text-shadow: 0 0 40px #ff8000; }
+    83.33% { color: #ff00ff; text-shadow: 0 0 40px #ff00ff; }
+    91.66% { color: #80ff00; text-shadow: 0 0 40px #80ff00; }
+    100% {
+        color: #00ffff;
+        text-shadow: 0 0 40px #00ffff;
+        transform: scale(1);
     }
 }
 
