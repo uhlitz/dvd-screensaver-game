@@ -1,6 +1,7 @@
 class DVDCornerChallenge {
             constructor() {
-                this.MAX_SPEED_MULTIPLIER = 20; // Speed 11 is 20x faster than speed 1
+                this.MIN_SPEED = 1; // Speed when the slider is at 1
+                this.MAX_SPEED = 20; // Speed when the slider is at 11
                 this.initializeElements();
                 this.initializeGame();
                 this.setupEventListeners();
@@ -63,10 +64,7 @@ class DVDCornerChallenge {
                 
                 // Game configuration
                 this.config = {
-                    // Use the same base speed for previews and gameplay so
-                    // there is no noticeable speed change when the game starts
-                    basePreviewSpeed: 1,
-                    baseGameSpeed: 1,
+                    // Slider value for speed control (1-11)
                     speedMultiplier: 3, // Default speed (slider value 3)
                     baseLogo: { width: 200, height: 88 },
                     sizeMultiplier: 3, // Default size (slider value 3)
@@ -249,13 +247,12 @@ class DVDCornerChallenge {
             }
             
             updateSpeeds() {
-                // Linear mapping: speed 1 = 1x, speed 11 = MAX_SPEED_MULTIPLIER x
-                // speed = 1 + (sliderValue - 1) * (MAX_SPEED_MULTIPLIER - 1) / (maxSlider - 1)
+                // Linear mapping: slider 1 => MIN_SPEED, slider 11 => MAX_SPEED
                 const sliderValue = this.config.speedMultiplier;
                 const maxSlider = 11;
-                const speedFactor = 1 + (sliderValue - 1) * (this.MAX_SPEED_MULTIPLIER - 1) / (maxSlider - 1);
-                this.config.previewSpeed = this.config.basePreviewSpeed * speedFactor;
-                this.config.gameSpeed = this.config.baseGameSpeed * speedFactor;
+                const speed = this.MIN_SPEED + (sliderValue - 1) * (this.MAX_SPEED - this.MIN_SPEED) / (maxSlider - 1);
+                this.config.previewSpeed = speed;
+                this.config.gameSpeed = speed;
             }
             
             updateSizes() {
