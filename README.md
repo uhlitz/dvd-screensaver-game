@@ -47,4 +47,4 @@ MIT License. Free to use and modify.
 
 ---
 
-Vibe coded for fun and nostalgia!
+Vibe coded with Claude 4 Sonet and GPT 4.1.
