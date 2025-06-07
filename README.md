@@ -11,7 +11,7 @@ A neon-soaked browser game inspired by the classic DVD screensaver. Open `index.
 - **Corner Hit Showdown:** First logo to hit any corner wins the round.
 - **Live Logo Preview:** See your logo bounce around as you type your name.
 - **Custom Game Settings:**
-  - **Speed:** Crank it up or slow it down (1-5).
+  - **Speed:** Crank it up or slow it down (1-11).
   - **Logo Size:** Make your logo huge or keep it classic (1-5).
 - **Neon Arcade UI:** Flashy, animated buttons and overlays with glowing effects.
 - **Fullscreen Mode:** Go immersive with 'F'.
