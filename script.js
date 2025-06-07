@@ -621,7 +621,7 @@ class DVDCornerChallenge {
 
             randomizeBounceAngle(obj) {
                 const speed = Math.sqrt(obj.velocityX * obj.velocityX + obj.velocityY * obj.velocityY);
-                const angle = (40 + Math.random() * 10) * (Math.PI / 180);
+                const angle = (35 + Math.random() * 20) * (Math.PI / 180);
                 const signX = Math.sign(obj.velocityX) || 1;
                 const signY = Math.sign(obj.velocityY) || 1;
                 obj.velocityX = Math.cos(angle) * speed * signX;
