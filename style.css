@@ -620,6 +620,10 @@ body {
     pointer-events: none;
 }
 
+.ui-hidden {
+    display: none !important;
+}
+
 .bounce-effect {
     transform: scale(1.1);
 }

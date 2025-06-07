@@ -54,6 +54,7 @@ class DVDCornerChallenge {
                     previewLogos: [],
                     gameRunning: false,
                     gameStarted: false,
+                    uiHidden: false,
                     winner: null,
                     currentPlayerCount: 3,
                     maxPlayers: 12
@@ -206,6 +207,11 @@ class DVDCornerChallenge {
                         e.preventDefault();
                         this.toggleSound();
                     }
+                    // [H] hide/show UI during gameplay
+                    if ((e.key === 'h' || e.key === 'H') && (!active || active.tagName !== 'INPUT')) {
+                        e.preventDefault();
+                        this.toggleUIVisibility();
+                    }
                     // ENTER starts game if not in input and game hasn't started
                     if (e.key === 'Enter' && (!active || active.tagName !== 'INPUT')) {
                         if (!this.state.gameStarted && this.canStartGame()) this.startGame();
@@ -270,6 +276,14 @@ class DVDCornerChallenge {
                     document.exitFullscreen();
                 }
             }
+
+            toggleUIVisibility() {
+                if (!this.state.gameRunning) return;
+                this.state.uiHidden = !this.state.uiHidden;
+                const action = this.state.uiHidden ? 'add' : 'remove';
+                this.elements.bottomButtons.classList[action]('ui-hidden');
+                this.elements.gameStats.classList[action]('ui-hidden');
+            }
             
             setupPlayerEventListeners() {
                 for (let i = 1; i <= this.state.currentPlayerCount; i++) {
@@ -332,6 +346,10 @@ class DVDCornerChallenge {
                 this.elements.buttons.stop.style.display = 'block';
                 this.elements.buttons.restart.style.display = 'none';
                 this.elements.buttons.soundToggle.style.display = 'block';
+
+                this.state.uiHidden = false;
+                this.elements.bottomButtons.classList.remove('ui-hidden');
+                this.elements.gameStats.classList.remove('ui-hidden');
                 
                 // Convert existing preview logos to game logos
                 this.convertPreviewsToGameLogos();
@@ -712,11 +730,14 @@ class DVDCornerChallenge {
             stopGame() {
                 this.state.gameRunning = false;
                 this.state.gameStarted = false;
+                this.state.uiHidden = false;
                 this.cleanupPlayers();
                 // Show/hide correct buttons
                 this.elements.buttons.stop.style.display = 'none';
                 this.elements.buttons.restart.style.display = 'none';
                 this.elements.buttons.soundToggle.style.display = 'block';
+                this.elements.bottomButtons.classList.remove('ui-hidden');
+                this.elements.gameStats.classList.remove('ui-hidden');
                 this.elements.gameStats.classList.remove('show');
                 this.elements.gameStats.innerHTML = '';
                 this.elements.gameSetup.classList.remove('hidden');
@@ -730,7 +751,8 @@ class DVDCornerChallenge {
                 Object.assign(this.state, {
                     gameRunning: false,
                     gameStarted: false,
-                    winner: null
+                    winner: null,
+                    uiHidden: false
                 });
                 this.elements.winnerOverlay.classList.remove('show');
                 this.elements.winnerOverlay.classList.remove('winner-animation');
@@ -738,6 +760,8 @@ class DVDCornerChallenge {
                 this.elements.buttons.stop.style.display = 'none';
                 this.elements.buttons.restart.style.display = 'none';
                 this.elements.buttons.soundToggle.style.display = 'block';
+                this.elements.bottomButtons.classList.remove('ui-hidden');
+                this.elements.gameStats.classList.remove('ui-hidden');
                 this.elements.gameStats.classList.remove('show');
                 this.elements.gameSetup.classList.remove('hidden');
                 this.elements.gameStats.innerHTML = '';
